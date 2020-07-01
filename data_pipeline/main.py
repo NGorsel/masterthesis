@@ -43,42 +43,15 @@ import argparse
 
 #Loading in some data I will need
 URL_BASE = 'https://stevesie.com/cloud/api/v1'
-API_TOKEN = "2909aaa7-b017-45c5-b96a-314bb8aa325c"
+API_TOKEN = "XXXXXXXXXXXXXXXXXXXXX" # SECRRET <-- IF YOU WANT ONE PLEASE VISIT STEVESIEDATA.ORG
 
 auth_headers = {
   'Token': API_TOKEN,
 }
 
-#known userIDs
-userIDs = {
-    "ikeanederland" : "289542609",
-    "joerivandermeer" : "919159490",
-    "broederschap_der_kruisridders" : "9623334065",
-    "myronvg" : "40032967",
-    "zinzzi" : "5903508"
-}
-
-
 #Session IDs of three of my accounts.
 sessionIDs = {
-#"slushpuppy112358" : "25088326271%3AYOUQLjsMbReZG7%3A4",
-"dragonsden112358" : "25126372963%3AcPu7E7TCUB8tBh%3A1",
-"Lycamobile112358" :"25713281404%3ANVM8xGdxaPr1Se%3A11",
-#"openidaging" : "25841755182%3AJHPEccikN0Cpjw%3A10",
-#"unmovablehis" : "26403210604%3AziQol4ThUsqeei%3A27",
-"dormanthitter" : "26409601578%3A4IEsGfuSWw6MWi%3A28",
-#"aftermathbeneficent" : "26197293736%3ANIFMJNu5TNZe4y%3A14",
-#"farigaigbapser" : "26230456483%3AB8LZchWeNBtne4%3A18",
-#"gentilegalvanising" : "25994207495%3AIEmCofLFz9i53T%3A3",
-#"poodunlin" : "26210450746%3AjnAfz3imUb8jWZ%3A23",
-#"havenergonomic" : "25832908687%3ANRhMglKqBXW5iy%3A6",
-#"grainsgilldeceiveerx" : "26223202227%3Ae064HdXF0AfA3D%3A15",
-#"surveyskoardser" : "26204950382%3A63y1ZI2qA7QXWF%3A24",
-#"fierycollecteder" : "25850539344%3AyAZJ0dHa1BBqJt%3A14",
-#"exploretidingr" : "26217044169%3AY7uv2WX8waWhSM%3A2",
-"punctuatebicycle" : "25864241221%3A86BVZymXHPbuDp%3A17"
-#"tripwirereuse": "26205214104%3AD9LjL4k82O92uE%3A1"
-
+"Instauser" : "2XXXXXXXXXXXXXXXXXXXXX" #  SECRRET <-- IF YOU WANT TO USE ENTER THE SESSION ID OF YOUR OWN INSTAGRAM ACCOUNT.
  }
 
 

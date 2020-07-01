@@ -247,32 +247,6 @@ def executeWorkflow(workflowID, API_TOKEN, proxyType, format, executionName, MRC
         time.sleep(10)
         result_location = [value['url'] for value in new_execution_details['results']][0]
 
-      # if workflowID in ["ed8a59aa-b40a-497e-b20c-175109e15123"]: #Extract follower names
-      #      #Printing the final found even though the workflow is finished
-      #      
-      #      
-      #      if len(new_execution_result_IDS) > 1:
-      #          #Reversing the list so the final result is at the back of the list.
-      #          final_execution_result_ID = new_execution_result_IDS[0]
-      #          new_execution_result_IDS = new_execution_result_IDS[1::].reverse()
-      #      else:
-      #          final_execution_result_ID = new_execution_result_IDS[0]
-      #          new_execution_result_IDS = []
-      #      
-      #      try:
-      #          for value in new_execution_result_IDS:
-      #              if value not in execution_result_IDS:
-      #                  #Using the new_execution_details function to define the code of the new found execution ID
-      #                  value_code = executionResult_code(new_execution_details,value)
-      #                  print("UPDATE - New execution result {}. Code: {}".format(value, value_code))
-      #                  execution_result_IDS.append(value) 
-      #      except TypeError:
-      #          print('INFO - Attention: somehow no new results were found. This may indicate an error.')
-      #
-      #      #Lastly printing the location of the final result file and returning the JSON which is found in that link.
-      #      result_location = [value['url'] for value in new_execution_details['results'] if value['id'] == final_execution_result_ID][0]
-      #      print("UPDATE - The workfow execution is finished. Final results are stored in the following link: {}".format(result_location))
-      #      
         if format == 'csv':
             datadf = pd.read_csv(result_location)
             return datadf
