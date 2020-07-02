@@ -117,13 +117,13 @@ def main(profileName, run, followerLoc, workflows, sessionIDs, API_TOKEN, URL_BA
         print("INFO - As opposed we will create another follower profile for {}".format(profileName))
 
         if followerLoc == 'second':
-            with open('data/{}_second_followers.json'.format(profileName)) as json_file:
+            with open('../rawdata/{}_second_followers.json'.format(profileName)) as json_file:
                 userFollowersJSON = json.load(json_file)
         elif followerLoc:
-            with open('data/{}'.format(followerLoc)) as json_file:
+            with open('../rawdata/{}'.format(followerLoc)) as json_file:
                 userFollowersJSON = json.load(json_file)
         else:
-            with open('data/{}_followers.json'.format(profileName)) as json_file:
+            with open('../rawdata/{}_followers.json'.format(profileName)) as json_file:
                 userFollowersJSON = json.load(json_file)
 
         stored_nameDict = createFollowerdf(userFollowersJSON)
@@ -134,21 +134,21 @@ def main(profileName, run, followerLoc, workflows, sessionIDs, API_TOKEN, URL_BA
         # Now we take a look at the follower profile we already created. We do not want
         # to extract posts from these usernames again!
         if run == 'fourth':
-            post_df_1 = pd.read_csv('data/{}_followerProfile.csv'.format(profileName))
-            post_df_2 = pd.read_csv('data/{}_second_followerProfile.csv'.format(profileName))
-            post_df_3 = pd.read_csv('data/{}_third_followerProfile.csv'.format(profileName))
+            post_df_1 = pd.read_csv('../rawdata/{}_followerProfile.csv'.format(profileName))
+            post_df_2 = pd.read_csv('../rawdata/{}_second_followerProfile.csv'.format(profileName))
+            post_df_3 = pd.read_csv('../rawdata/{}_third_followerProfile.csv'.format(profileName))
             extracted_IDS_1 = [value for value in [value for value in set(post_df_1['data.user.edge_owner_to_timeline_media.edges.node.owner.username'])]]
             extracted_IDS_2 = [value for value in [value for value in set(post_df_2['data.user.edge_owner_to_timeline_media.edges.node.owner.username'])]]
             extracted_IDS_3 = [value for value in [value for value in set(post_df_3['data.user.edge_owner_to_timeline_media.edges.node.owner.username'])]]
             extracted_IDS = extracted_IDS_1 + extracted_IDS_2 + extracted_IDS_3
         elif run == 'third':
-            post_df_1 = pd.read_csv('data/{}_followerProfile.csv'.format(profileName))
-            post_df_2 = pd.read_csv('data/{}_second_followerProfile.csv'.format(profileName))
+            post_df_1 = pd.read_csv('../rawdata/{}_followerProfile.csv'.format(profileName))
+            post_df_2 = pd.read_csv('../rawdata/{}_second_followerProfile.csv'.format(profileName))
             extracted_IDS_1 = [value for value in [value for value in set(post_df_1['data.user.edge_owner_to_timeline_media.edges.node.owner.username'])]]
             extracted_IDS_2 = [value for value in [value for value in set(post_df_2['data.user.edge_owner_to_timeline_media.edges.node.owner.username'])]]
             extracted_IDS = extracted_IDS_1 + extracted_IDS_2
         elif run == 'second':
-            post_df = pd.read_csv('data/{}_followerProfile.csv'.format(profileName))
+            post_df = pd.read_csv('../rawdata/{}_followerProfile.csv'.format(profileName))
             extracted_IDS = [value for value in post_df['data.user.edge_owner_to_timeline_media.edges.node.owner.username']]
         else:
             print('ERROR - Shutdown code! We currently only created code for a first, second or third run!')
@@ -190,10 +190,6 @@ def main(profileName, run, followerLoc, workflows, sessionIDs, API_TOKEN, URL_BA
         userFollowersJSON = executeWorkflow(workflows['followers_new']['workflowID'], API_TOKEN, proxyType, 'json', profileName, 2000)
         #Executing a function to store this result in the data folder so nothing is lost
         storeJSON(userFollowersJSON, profileName+"_followers")
-        #Using three function to first create a dataframe, than calculate sample size and
-        #thirdly select n (sample size) profiles which have their private settings off.
-        ####with open('data/{}_followers.json'.format(profileName)) as json_file:
-        ####    userFollowersJSON = json.load(json_file)
         nameDict = createFollowerdf(userFollowersJSON)
 
     sampledf = obtainSample(nameDict, userFollowers)
@@ -208,9 +204,9 @@ def main(profileName, run, followerLoc, workflows, sessionIDs, API_TOKEN, URL_BA
     
     ###storeJSON(postsJSON, profileName+"_followerProfile")
     if run == 'first':
-        postsJSON.to_csv('data/{}_followerProfile.csv'.format(profileName)) #DELETE IF BACK TO JSON. DONT FORGET TO CHANGE workflowCall_postTimerange FUNCTION (NOT SET AT CSV)
+        postsJSON.to_csv('../rawdata/{}_followerProfile.csv'.format(profileName)) #DELETE IF BACK TO JSON. DONT FORGET TO CHANGE workflowCall_postTimerange FUNCTION (NOT SET AT CSV)
     else:
-        postsJSON.to_csv('data/{}_{}_followerProfile.csv'.format(profileName, run)) #DELETE IF BACK TO JSON. DONT FORGET TO CHANGE workflowCall_postTimerange FUNCTION (NOT SET AT CSV)
+        postsJSON.to_csv('../rawdata/{}_{}_followerProfile.csv'.format(profileName, run)) #DELETE IF BACK TO JSON. DONT FORGET TO CHANGE workflowCall_postTimerange FUNCTION (NOT SET AT CSV)
     print("FINISHED - Successfully created a follower profile for {}.".format(profileName))
     return
 
